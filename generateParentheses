@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> vs;
+        if (!n)
+            return vs;
+        if (n==1)
+        {
+            string s ("()");
+            vs.push_back(s);
+            return vs;
+        }
+        vs = generateParenthesis(n-1);
+        vector<string> vout;
+        for (vector<string>::iterator iter = vs.begin(); iter != vs.end(); iter++) {
+            string temp = *iter;
+            vector<string> vafter = insertP(temp);
+            for (vector<string>::iterator it2 = vafter.begin(); it2 != vafter.end(); it2++) {
+                if (stringSet.find(*it2) == stringSet.end()) {
+                    vout.push_back(*it2);
+                    stringSet.insert(*it2);
+                }
+            }
+        }
+        return vout;
+    }
+private:
+    vector<string> insertP(string in) {
+        vector<string> out;
+        if (in == "")
+            return out;
+        out.push_back("()"+in);
+        out.push_back(in+"()");
+        int len = in.length();
+        for (int i=0;i<len;i++) {
+            if (in[i] == '('){
+                string before = in.substr(0,i+1);
+                string after = in.substr(i+1);
+                out.push_back(before+"()"+after);
+            }
+        }
+        return out;
+    }
+    unordered_set<string> stringSet;
+};
