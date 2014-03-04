@@ -1,5 +1,6 @@
 // one contains bits that appear 3k+1 times in array A
 // two contains bits that appear 3k+2 times in array A
+
 public int singleNumber(int[] A) {
     int one = 0, two = 0;
     for (int i = 0; i < A.length; i++) {
