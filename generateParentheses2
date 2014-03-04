@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> vout;
+        if (n<=0)
+            return vout;
+        string s(2*n,' ');
+        generateRecursion(vout, s, 0, n, 0, 0);
+        return vout;
+    }
+private:
+    void generateRecursion(vector<string>& vs, string currentStr, int index, int size, int numleft, int numright)
+    {
+        int length = size*2;
+        if (index == length)
+        {
+            vs.push_back(currentStr);
+            return;
+        }
+        
+        if (numleft<size) {
+            currentStr[index] = '(';
+            generateRecursion(vs, currentStr, index+1, size, numleft+1, numright);
+        }
+        
+        if (numright<numleft) {
+            currentStr[index] = ')';
+            generateRecursion(vs, currentStr, index+1, size, numleft, numright+1);
+        }
+    }
+};
