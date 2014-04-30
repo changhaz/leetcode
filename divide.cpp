@@ -8,41 +8,35 @@ public:
         bool dividendneg = false;
         bool divisorneg = false;
         
-        if (dividend<0) {
+        double a = dividend;
+        double b = divisor;
+        
+        if (a<0) {
             dividendneg = true;
-            dividend = -dividend;
+            a = -a;
         }
         
-        if (divisor<0) {
+        if (b<0) {
             divisorneg = true;
-            divisor = -divisor;
+            b = -b;
         }
         
         int out=0;
-        while (dividend>0) {
-			cout<<"divisor start from original."<<endl;
-			cout<<"dividend: "<<dividend<<endl;
-			cout<<"out: "<<out<<endl;
-            
-			int outadd = 1;
-            int timedivisor = divisor;
-            while (dividend>=timedivisor) {
-				cout<<"add "<<outadd<<" to output"<<endl;
+        while (a>0) {
+            int outadd = 1;
+            double timedivisor = b;
+            while (a>=timedivisor) {
                 out+=outadd;
-                dividend -= timedivisor;
+                a -= timedivisor;
                 outadd = outadd + outadd;
                 timedivisor = timedivisor + timedivisor;
-				if (timedivisor<0) {
-					break;
-				}
             }
             
-            if (dividend < divisor) {
+            if (a < b) {
                 break;
             }
         }
          
-        
         if (dividendneg)
             out = -out;
         
