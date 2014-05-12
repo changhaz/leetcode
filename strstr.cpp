@@ -13,22 +13,22 @@ public:
 
 		int j = 0;
 		int i = 0;
-		while (i < hlen) {
-			if (haystack[i] == needle[j]) {
+		int iori = 0;
+		cout<<"nlen: "<<nlen<<endl;
+		while (i <= hlen-nlen) {
+			while (j < nlen && haystack[i+j] == needle[j])
 				j++;
-				i++;
-				if (j==nlen) {
-					return haystack+i;
-					cout<<"output start i: "<<i<<endl;
-				}
-			} else {
-				if (j == 0) continue;
-				i += j-(prefixarr[j-1]+1);
+			if (j == nlen)
+				return haystack+i;
+			if (j > 0) {
+				i += j - (prefixarr[j-1]+1);
 				j = prefixarr[j-1] + 1;
 			}
+			else
+				i++;
 		}
-		return NULL;        
-    }
+		return NULL;
+	}
 
 	vector<int> buildprefixarr(char* c) {
 		int clen = strlen(c);
