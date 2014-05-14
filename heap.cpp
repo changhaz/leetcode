@@ -23,7 +23,6 @@ public:
 
 void myheap::heapify(int i)
 {
-	cout<<"heapify for value "<<array[i]<<endl;
 	int maxi = i;
 	if (left(i)<=heapsize && array[i]<array[left(i)]) {
 		maxi = left(i);
@@ -32,7 +31,6 @@ void myheap::heapify(int i)
 		maxi = right(i);
 	}
 	if (maxi != i) {
-		cout<<"i: "<<i<<" maxi: "<<maxi<<endl;
 		swap(array[i],array[maxi]);
 		printheap();
 		heapify(maxi);
@@ -44,9 +42,8 @@ void myheap::buildheap(vector<int> v)
 	array = v;
 	array.insert(array.begin(),0);
 	heapsize = array.size()-1;
-	printheap();
 	for (int i=heapsize/2; i>=1; i--) {
-		printheap();
+		// cout<<"heapify "<<i<<endl;
 		heapify(i);
 	}
 }
@@ -54,12 +51,16 @@ void myheap::buildheap(vector<int> v)
 vector<int> heapsort(vector<int> vi) {
 	myheap h;
 	h.buildheap(vi);
+	h.printheap();
 	vector<int> out;
 	
 	while (h.heapsize>0) {
+		cout<<"push to output: "<<h.array[1]<<endl;
 		out.push_back(h.array[1]);
 		swap(h.array[1],h.array[h.heapsize]);
 		h.heapsize--;
+		h.heapify(1);
+		h.printheap();
 	}
 	return out;
 }
@@ -69,6 +70,7 @@ int main() {
 	vector<int> v(a,a+sizeof(a)/sizeof(int));
 	vector<int> out = heapsort(v);
 
+	cout<<"output: ";
 	for (int i=0;i<out.size();i++) {
 		cout<<out[i]<<" ";	
 	}
