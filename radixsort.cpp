@@ -31,10 +31,12 @@ void countingsort(vector<int> &vi, int d)
 	for (int i=0;i<vi.size();i++) {
 		c[getdigit(vi[i],d)]++;
 	}
-	
+	// c[i] now contains the number of elements equal to i.
+		
 	for (int i=1;i<10;i++) {
 		c[i] += c[i-1];
 	}
+	// c[i] now contains the number of elements less than or equal to i
 	
 	for (int i=vi.size()-1;i>=0;i--) {
 		out[c[getdigit(vi[i],d)]-1] = vi[i];
