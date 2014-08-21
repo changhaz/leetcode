@@ -37,11 +37,12 @@ void* threadfunc1(void* v)
 		cout<<" "<<count/2+1;
 		count++;
 		
-		pthread_mutex_unlock(&mutex1);
-
 		if (count>=5) {
+			pthread_mutex_unlock(&mutex1);
 			return NULL;
 		}
+
+		pthread_mutex_unlock(&mutex1);
 	}
 }
 
@@ -58,11 +59,11 @@ void* threadfunc2(void* v)
 			pthread_cond_signal(&condition_var);
 		}
 		
-		pthread_mutex_unlock(&mutex1);
-		
 		if (count>=6) {
+			pthread_mutex_unlock(&mutex1);
 			return NULL;
 		}
-		
+
+		pthread_mutex_unlock(&mutex1);
 	}
 }
